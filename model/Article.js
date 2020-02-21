@@ -2,13 +2,16 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const articleSchema = new Schema({
-    UserID : {
+    UserId : {
         type: Schema.Types.ObjectId,
-        ref: 'Users'
+        ref: 'User'
     },
     url : {
         type: String,
         required: [true, 'Url is required']
+    },
+    keyPoint:{
+        type: String
     }
 })
 
