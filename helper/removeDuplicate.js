@@ -11,7 +11,7 @@
 
 const excludedWord = [
     'kami', 'saya', 'dia', 'akan', 'nanti', 'yang', 'yaitu',
-    'dan', 
+    'dan', 'atau'
 ]
 
 function removeExcludedWord ( textString ){
@@ -30,10 +30,10 @@ function removeExcludedWord ( textString ){
 
 
 module.exports = ( originalText )=>{
-const minimumMatch = 25
+const minimumMatch = 30
 console.log(`\n\n\nTCL: originalText\n=================\n`, originalText)
 
-fullText = removeExcludedWord( originalText.join('splitter1').replace(/\n/gi) ) //pake yang ini
+fullText = removeExcludedWord( originalText.join('splitter1').replace(/\n/gi).toLowerCase() ) //pake yang ini
 // fullText = removeExcludedWord( testText.join('splitter1') ) //nanti dicomment
 console.log(`\n\n\n\n\nTCL: fullText\n=================\n`, fullText)
 
@@ -60,6 +60,7 @@ for (let x = 0; x < fullText.length-1; x++)
 
 
     // compare to all the rest of the array
+    let uniqueStatus = true
     for( let y = x+1; y < x+2; y++)
     {
         console.log(`TCL: x`, x)
@@ -83,23 +84,31 @@ for (let x = 0; x < fullText.length-1; x++)
         if( duplicateKey.length > 0)
         {
             const percentage = Math.round(( duplicateKey.length / initialBaseTextArray.length ) * 100)
+            console.log(`TCL: duplicateKey.length`, duplicateKey.length)
             console.log(`TCL: duplicate percentage`, percentage)
 
             if(percentage > minimumMatch)
             {
+                uniqueStatus = false
+                console.log('\n======================\n ini yang bakal dipush dalam array')
                 if( initialBaseFullText.length > fullText[y].length)  
                 {
                     redactedFullTextArray.push(originalText[x])
+                    console.log(`TCL: originalText[x]`, originalText[x])
                 }
                 else
                 {
                     redactedFullTextArray.push(originalText[y])
+                    console.log(`TCL: originalText[y]`, originalText[y])
                 }
                 x +=1
                 break
             }
         }
     }
+
+    if(uniqueStatus)
+        redactedFullTextArray.push(originalText[x])
     
     console.log('=========================================\n\n\n\n\n')
 }
