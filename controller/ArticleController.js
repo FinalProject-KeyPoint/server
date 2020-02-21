@@ -7,6 +7,59 @@ class ArticleController{
         res.json({ message: 'Article Connected' })
     }
 
+    static masterFind(req,res,next)
+    {
+        Article.find()
+        .then(result=>{
+            res.status(200).json(result)
+        })
+        .catch(err=>{
+            next(err)
+        })
+    }
+
+    static masterDelete(req,res,next)
+    {
+        Article.remove()
+        .then(result=>{
+            res.status(200).json(result)
+        })
+        .catch(err=>{
+            next(err)
+        })
+    }
+
+    static addArticle(req,res,next)
+    {
+        console.log(' \n\n\n======================\n ADD ARTICLE')
+        const { url, keyPoint } = req.body
+        const UserId = req.decodedUser._id
+        console.log(`TCL: ArticleController -> UserId`, UserId)
+
+        Article.create({
+            UserId, url, keyPoint
+        })
+        .then(result=>{
+            res.status(201).json(result)
+        })
+        .catch(err=>{
+            next(err)
+        })
+    }
+
+    static deleteArticle(req,res,next)
+    {
+        Article.findOneAndDelete({
+            _id : req.params.articleId
+        })
+        .then(result=>{
+            res.status(200).json(result)
+        })
+        .catch(err=>{
+            next(err)
+        })
+    }
+
     static removeDuplicate(req,res,next)
     {
         console.log(' \n\n\n======================\n REMOVE DUPLICATE')
@@ -43,6 +96,7 @@ class ArticleController{
             redactedArticle : removeDuplicate(fullTextArray) 
         })
     }
+
 
 }
 
