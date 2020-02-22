@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const sampleSchema = new Schema({
-    originalText:[{
+    originalArticle:[{
         type: String
     }]
 })

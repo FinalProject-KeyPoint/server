@@ -19,6 +19,7 @@ class ArticleController{
         })
     }
 
+
     static masterDelete(req,res,next)
     {
         Article.remove()
@@ -66,7 +67,7 @@ class ArticleController{
         // console.log(req.body[0])
         console.log(' \n\n\n======================\n REMOVE DUPLICATE')
         Sample.create({
-            content : req.body
+            originalArticle : req.body
         })
         .then(result=>{
             res.status(200).json({ 
