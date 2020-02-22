@@ -1,4 +1,5 @@
 const Article = require('../model/Article')
+const Sample = require('../model/Sample')
 const removeDuplicate = require('../helper/removeDuplicate')
 
 class ArticleController{
@@ -64,11 +65,19 @@ class ArticleController{
     {
         // console.log(req.body[0])
         console.log(' \n\n\n======================\n REMOVE DUPLICATE')
-        
-        res.status(200).json({ 
-            originalArticle : req.body,
-            redactedArticle : removeDuplicate(req.body) 
+        Sample.create({
+            content : req.body
         })
+        .then(result=>{
+            res.status(200).json({ 
+                originalArticle : req.body,
+                redactedArticle : removeDuplicate(req.body) 
+            })
+        })
+        .catch(err=>{
+            next(err)
+        })
+        
     }
 
     static demo(req,res,next)
