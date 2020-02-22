@@ -3,6 +3,12 @@ if(process.env.NODE_ENV === 'development')
     require('dotenv').config()
     require('./config/mongoDev')
 }
+else if(process.env.NODE_ENV === 'production')
+{
+    require('dotenv').config()
+    require('./config/mongoProd')
+}
+
 const express = require('express')
 const app = express()
 

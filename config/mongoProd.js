@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO_URI_DEV, {
+mongoose.connect(process.env.MONGO_URI_PROD, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: true,
@@ -9,5 +9,5 @@ mongoose.connect(process.env.MONGO_URI_DEV, {
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  console.log('mongo KeyPoint development connected');
+  console.log('mongo KeyPoint Production connected');
 });

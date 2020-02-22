@@ -8,6 +8,7 @@ router.post('/redactedArticle', ArticleController.removeDuplicate)
 router.get('/masterFind', ArticleController.masterFind)
 router.delete('/masterDelete', ArticleController.masterDelete)
 
+router.post('/demo', ArticleController.demo)
 
 router.use(authentication)
 router.post('/', ArticleController.addArticle)

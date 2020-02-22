@@ -1,17 +1,7 @@
-// const text1 = 'jap, hendy, wijaya,   jap, saya, yang, akan .... ~!@#$%^&*  ( ) _ + =*-{}[]|:"?><,./;'
-// const text2 = 'jap, harry, wijaya, jap'
-// const text3 = 'jap, herlin, wijaya,    wijaya,,,  wijaya .... ~!@#$%^&*  ( ) _ + =*-{}[]|:"?><,./;'
-// const text4 = 'jakarta, palembang .... ~!@#$%^&*  ( ) _ + =*-{}[]|:"?><,./;'
-// const text5 = 'medan, surabaya,   jakarta'
-
-// const testText = [ text1, text2, text3, text4, text5 ]
-// console.log(`TCL: testText`, testText)
-
-
-
 const excludedWord = [
     'kami', 'saya', 'dia', 'akan', 'nanti', 'yang', 'yaitu',
-    'dan', 'atau'
+    'dan', 'atau', 'di', 'kita', 'dari', 'lalu', 'untuk',
+    'ada'
 ]
 
 function removeExcludedWord ( textString ){
@@ -106,9 +96,14 @@ for (let x = 0; x < fullText.length-1; x++)
             }
         }
     }
+    
+    console.log(`TCL: uniqueStatus`, uniqueStatus)
 
     if(uniqueStatus)
         redactedFullTextArray.push(originalText[x])
+
+    if(x === fullText.length-2 && uniqueStatus)
+        redactedFullTextArray.push(originalText[x+1])
     
     console.log('=========================================\n\n\n\n\n')
 }

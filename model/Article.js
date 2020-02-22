@@ -6,6 +6,10 @@ const articleSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    title:{
+        type: String,
+        required: [true, 'Title is required']
+    },
     url : {
         type: String,
         required: [true, 'Url is required']
