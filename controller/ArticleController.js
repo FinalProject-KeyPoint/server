@@ -118,17 +118,35 @@ class ArticleController{
     // }
 
 
+    // sample dari live test
     static demo(req,res,next)
     {
         console.log(' \n\n\n======================\n DEMO')
-        const article = require(`../helper/articles sample/sample${req.body.index}`)
-        console.log(`TCL: ArticleController -> article`, article)
-        
-        res.status(200).json({ 
-            originalArticle : article,
-            redactedArticle : removeDuplicate(article) 
+        Sample.find()
+        .then(result=>{
+            const originalArticle = result[req.body.index].originalArticle
+            res.status(200).json({
+                originalArticle,
+                redactedArticle : removeDuplicate(originalArticle)
+            })
+        })
+        .catch(err=>{
+            next(err)
         })
     }
+
+    // hard code sample
+    // static demo(req,res,next)
+    // {
+    //     console.log(' \n\n\n======================\n DEMO')
+    //     const article = require(`../helper/articles sample/sample${req.body.index}`)
+    //     console.log(`TCL: ArticleController -> article`, article)
+        
+    //     res.status(200).json({ 
+    //         originalArticle : article,
+    //         redactedArticle : removeDuplicate(article) 
+    //     })
+    // }
 
 
 }
