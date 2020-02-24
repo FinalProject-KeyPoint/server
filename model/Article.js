@@ -16,7 +16,8 @@ const articleSchema = new Schema({
     },
     keyPoint:[{
         type: String
-    }]
+    }],
+    required: [true, 'Keypoint is required']
 })
 
 const Article = mongoose.model('Articles', articleSchema)
