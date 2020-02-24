@@ -35,12 +35,12 @@ class ArticleController{
     static addArticle(req,res,next)
     {
         console.log(' \n\n\n======================\n ADD ARTICLE')
-        const { url, keyPoint } = req.body
+        const { url, keyPoint, title } = req.body
         const UserId = req.decodedUser._id
         console.log(`TCL: ArticleController -> UserId`, UserId)
 
         Article.create({
-            UserId, url, keyPoint
+            UserId, url, keyPoint, title
         })
         .then(result=>{
             res.status(201).json(result)
