@@ -14,9 +14,9 @@ const articleSchema = new Schema({
         type: String,
         required: [true, 'Url is required']
     },
-    keyPoint:{
+    keyPoint:[{
         type: String
-    }
+    }]
 })
 
 const Article = mongoose.model('Articles', articleSchema)
