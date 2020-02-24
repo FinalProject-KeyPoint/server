@@ -1,3 +1,4 @@
+const axios = require('axios')
 const Article = require('../model/Article')
 const Sample = require('../model/Sample')
 const removeDuplicate = require('../helper/removeDuplicate')
@@ -64,15 +65,30 @@ class ArticleController{
 
     static removeDuplicate(req,res,next)
     {
-        // console.log(req.body[0])
         console.log(' \n\n\n======================\n REMOVE DUPLICATE')
+
+        let redactedArticle = []
         Sample.create({
             originalArticle : req.body
         })
         .then(result=>{
-            res.status(200).json({ 
+            redactedArticle = removeDuplicate(req.body)
+            return 
+        })
+        .then( ()=>{
+            return axios({
+                method: 'post',
+                url: 'http://13.250.46.91:3000',
+                data:{
+                    isi_artikel : redactedArticle.join(' ')
+                }
+            })
+        })
+        .then( ({data})=>{
+            res.status(200).json({
                 originalArticle : req.body,
-                redactedArticle : removeDuplicate(req.body) 
+                redactedArticle,
+                keyPoint: data
             })
         })
         .catch(err=>{
@@ -80,6 +96,27 @@ class ArticleController{
         })
         
     }
+
+
+    // static removeDuplicate(req,res,next)
+    // {
+    //     // console.log(req.body[0])
+    //     console.log(' \n\n\n======================\n REMOVE DUPLICATE')
+    //     Sample.create({
+    //         originalArticle : req.body
+    //     })
+    //     .then(result=>{
+    //         res.status(200).json({ 
+    //             originalArticle : req.body,
+    //             redactedArticle : removeDuplicate(req.body) 
+    //         })
+    //     })
+    //     .catch(err=>{
+    //         next(err)
+    //     })
+        
+    // }
+
 
     static demo(req,res,next)
     {
