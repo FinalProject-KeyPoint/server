@@ -1,11 +1,10 @@
 # server
 
 PORT=3004
+MONGO_URI_TEST=mongodb://localhost/KeyPoint-test
 MONGO_URI_DEV=mongodb://localhost/KeyPoint
 MONGO_URI_PROD=mongodb+srv://jap:jap@cluster0-cpwjc.gcp.mongodb.net/KeyPoint?retryWrites=true&w=majority
 JWT_SECRET=terserah
-
-
 
 IMPORTANT NOTES:
  - Congratulations! Your certificate and chain have been saved at:
