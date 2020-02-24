@@ -1,8 +1,14 @@
 const excludedWord = [
     'kami', 'saya', 'dia', 'akan', 'nanti', 'yang', 'yaitu',
     'dan', 'atau', 'di', 'kita', 'dari', 'lalu', 'untuk',
-    'ada'
+    'ada', 'sejak', 'baik', 'belum', 'itu'
 ]
+// before update
+// const excludedWord = [
+//     'kami', 'saya', 'dia', 'akan', 'nanti', 'yang', 'yaitu',
+//     'dan', 'atau', 'di', 'kita', 'dari', 'lalu', 'untuk',
+//     'ada'
+// ]
 
 function removeExcludedWord ( textString ){
     console.log(`\n\n\nTCL: removeExcludedWord -> textString\n=================\n`, textString)

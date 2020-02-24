@@ -11,6 +11,7 @@ module.exports = (err,req,res,next)=>{
 
     switch (err.name) {
         case 'ValidationError':
+            status = 400
             let errMsg = []
             for( key in err.errors )
                 errMsg.push(err.errors[key].message)
@@ -18,6 +19,7 @@ module.exports = (err,req,res,next)=>{
             break;
     
         case 'MongoError':
+            status = 409
             if(err.code = 11000)
                 message = `${Object.keys(err.keyPattern)} is already used`
             break

@@ -53,6 +53,9 @@ class UserController{
     static login(req,res,next)
     {
         const { email, password } = req.body
+        if(!email || !password)
+            next({ status: 400, message: 'Requirement not satisfied' })
+            
         User.findOne({ email })
         .then(result=>{
             if(result)
@@ -62,7 +65,7 @@ class UserController{
                         const loginReturn = { ...result._doc }
                         delete loginReturn.password
 
-                        res.status(201).json({
+                        res.status(200).json({
                             ...loginReturn,
                             token : generateToken( result._id )
                         })
