@@ -3,11 +3,10 @@
 const { describe, after, it } = require('mocha');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('../app');
-const deleteAll = require('../helper/deleteAll');
+const app = require('../../app');
+const deleteAll = require('../../helper/deleteAll');
 
 chai.use(chaiHttp);
-
 after(done => {
   deleteAll(done);
 });
@@ -25,16 +24,18 @@ const newArticle = {
     'Mahfud Ungkap 2 Ancaman Kedaulatan Indonesia Berdasarkan Analisis Prabowo',
   url:
     'https://nasional.kompas.com/read/2020/02/21/13444071/mahfud-ungkap-2-ancaman-kedaulatan-indonesia-berdasarkan-analisis-prabowo',
-  keyPoint: JSON.stringify([
+    // YANG INI KENAPA JSON STRINGIFY??
+  keyPoint: [
     'Mahfud juga menyebut hal tersebut ancaman terhadap teritori Indonesia.',
     'Pertama, kata dia, ancaman di Laut Natuna Utara atau Laut China Selatan.',
     'Dia pun mengingatkan ancaman China tidak bisa dihadapi dengan adu kekuatan.',
     'Secara hitungan matematis, jika perang fisik dengan China terjadi, dipastikan Indonesia akan kalah.',
     '"Karena di situ ada klaim dari China yang di dalam konteks hukum internasional itu tidak ada.'
-  ])
+  ]
 };
 
-describe.only('ARTICLE TEST', () => {
+describe('ARTICLE TEST', function(){
+  this.timeout(5000)
   const { username, email, password } = newUser;
   it('register a new user', done => {
     chai
@@ -73,7 +74,7 @@ describe.only('ARTICLE TEST', () => {
           .send({ title, url, keyPoint })
           .set('token', newUser.token)
           .then(res => {
-            expect(res).to.have.status(500);
+            expect(res).to.have.status(201);
             expect(res.body).to.be.an('object');
             expect(res.body).to.have.property('_id');
             expect(res.body._id).to.be.a('string');
@@ -101,14 +102,14 @@ describe.only('ARTICLE TEST', () => {
           .post('/articles')
           .send({ title, url, keyPoint })
           .then(res => {
-            expect(res).to.have.status(500);
+            expect(res).to.have.status(400);
             expect(res.body).to.be.an('object');
             expect(res.body).to.have.property('errName');
             expect(res.body.errName).to.be.a('string');
             expect(res.body.errName).to.be.equal('JsonWebTokenError');
             expect(res.body).to.have.property('status');
             expect(res.body.status).to.be.a('number');
-            expect(res.body.status).to.be.equal(500);
+            expect(res.body.status).to.be.equal(400);
             expect(res.body).to.have.property('message');
             expect(res.body.message).to.be.a('string');
             expect(res.body.message).to.be.equal('jwt must be provided');
@@ -127,14 +128,14 @@ describe.only('ARTICLE TEST', () => {
         .send({ url, keyPoint })
         .then(res => {
           console.log(res.body);
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('ValidationError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.a('array');
           expect(res.body.message).to.be.deep.equal(['Title is required']);
@@ -151,14 +152,14 @@ describe.only('ARTICLE TEST', () => {
         .set('token', newUser.token)
         .send({ title, keyPoint })
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('ValidationError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.a('array');
           expect(res.body.message).to.be.deep.equal(['Url is required']);
@@ -175,17 +176,17 @@ describe.only('ARTICLE TEST', () => {
         .set('token', newUser.token)
         .send({ url, title })
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('ValidationError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.a('array');
-          expect(res.body.message).to.be.deep.equal(['keyPoint is required']);
+          expect(res.body.message).to.be.deep.equal(['Keypoint is required']);
 
           done();
         })
@@ -199,19 +200,19 @@ describe.only('ARTICLE TEST', () => {
         .set('token', newUser.token)
         .send({ keyPoint })
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('ValidationError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.a('array');
           expect(res.body.message).to.be.deep.equal([
-            'Title is required',
-            'Url is required'
+            'Url is required',
+            'Title is required'
           ]);
 
           done();
@@ -224,21 +225,21 @@ describe.only('ARTICLE TEST', () => {
         .request(app)
         .post('/articles')
         .set('token', newUser.token)
-        .send({ keyPoint })
+        .send({ url })
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('ValidationError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.a('array');
           expect(res.body.message).to.be.deep.equal([
             'Title is required',
-            'keyPoint is required'
+            'Keypoint is required'
           ]);
 
           done();
@@ -251,21 +252,21 @@ describe.only('ARTICLE TEST', () => {
         .request(app)
         .post('/articles')
         .set('token', newUser.token)
-        .send({ keyPoint })
+        .send({ title })
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('ValidationError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.a('array');
           expect(res.body.message).to.be.deep.equal([
-            'Url is requireid',
-            'keyPoint is required'
+            'Url is required',
+            'Keypoint is required'
           ]);
 
           done();
@@ -278,22 +279,21 @@ describe.only('ARTICLE TEST', () => {
         .request(app)
         .post('/articles')
         .set('token', newUser.token)
-        .send({ keyPoint })
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('ValidationError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.a('array');
           expect(res.body.message).to.be.deep.equal([
-            'Title is requireid',
             'Url is required',
-            'keyPoint is required'
+            'Title is required',
+            'Keypoint is required'
           ]);
 
           done();
@@ -309,14 +309,14 @@ describe.only('ARTICLE TEST', () => {
         .request(app)
         .delete(`/articles/${newArticle.articleId}`)
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('JsonWebTokenError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.a('string');
           expect(res.body.message).to.be.equal('jwt must be provided');
@@ -329,12 +329,11 @@ describe.only('ARTICLE TEST', () => {
     it('articleId is not provided, so it should be error', done => {
       chai
         .request(app)
-        .delete(`/articles`)
+        .delete(`/articles/`)
         .set('token', newUser.token)
         .then(res => {
           expect(res).to.have.status(404);
           expect(res.body).to.be.an('object').that.is.empty;
-
           done();
         })
         .catch(err => done(err));
@@ -346,7 +345,7 @@ describe.only('ARTICLE TEST', () => {
         .delete(`/articles/${newArticle.articleId}`)
         .set('token', newUser.token)
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('_id');
           expect(res.body._id).to.be.a('string');
@@ -359,6 +358,8 @@ describe.only('ARTICLE TEST', () => {
           expect(res.body).to.have.property('keyPoint');
           expect(res.body.keyPoint).to.be.an('array');
           expect(res.body.keyPoint).to.be.deep.equal(keyPoint);
+
+          done()
         })
         .catch(err => done(err));
     });

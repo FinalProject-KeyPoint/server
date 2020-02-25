@@ -6,6 +6,10 @@ module.exports = (req,res,next)=>{
         ========================
     `);
     
+    console.log(`TCL: req.params.articleId`, req.params.articleId)
+    if( !req.params.articleId )
+        next({ status: 404, message:'Article Id not provided' })
+
     Article.findOne({
         _id : req.params.articleId
     })

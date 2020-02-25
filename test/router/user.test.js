@@ -2,15 +2,15 @@
 const { describe, after, it } = require('mocha');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('../app');
-const deleteAll = require('../helper/deleteAll');
+const app = require('../../app');
+const deleteAll = require('../../helper/deleteAll');
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 const newUser = {
-  username: 'markus',
-  email: 'markus@email.com',
+  username: 'jap',
+  email: 'jap@email.com',
   password: '123456'
 };
 
@@ -49,14 +49,14 @@ describe('TEST USER', () => {
         .post('/users/register')
         .send({ username, password })
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('ValidationError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.an('array');
           expect(res.body.message).to.be.deep.equal(['Email is required']);
@@ -72,14 +72,14 @@ describe('TEST USER', () => {
         .post('/users/register')
         .send({ email, password })
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('ValidationError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.an('array');
           expect(res.body.message).to.be.deep.equal(['Username is required']);
@@ -95,14 +95,14 @@ describe('TEST USER', () => {
         .post('/users/register')
         .send({ username, email })
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('ValidationError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.an('array');
           expect(res.body.message).to.be.deep.equal(['Password is required']);
@@ -118,14 +118,14 @@ describe('TEST USER', () => {
         .post('/users/register')
         .send({ password })
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('ValidationError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.an('array');
           expect(res.body.message).to.be.deep.equal([
@@ -144,14 +144,14 @@ describe('TEST USER', () => {
         .post('/users/register')
         .send({ username })
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('ValidationError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.an('array');
           expect(res.body.message).to.be.deep.equal([
@@ -170,14 +170,14 @@ describe('TEST USER', () => {
         .post('/users/register')
         .send({ email })
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('ValidationError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.an('array');
           expect(res.body.message).to.be.deep.equal([
@@ -196,14 +196,14 @@ describe('TEST USER', () => {
         .post('/users/register')
         .send({})
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('errName');
           expect(res.body.errName).to.be.a('string');
           expect(res.body.errName).to.be.equal('ValidationError');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.an('array');
           expect(res.body.message).to.be.deep.equal([
@@ -226,7 +226,7 @@ describe('TEST USER', () => {
         .post('/users/login')
         .send({ email, password })
         .then(res => {
-          expect(res).to.have.status(201);
+          expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('_id');
           expect(res.body._id).to.be.a('string');
@@ -250,15 +250,15 @@ describe('TEST USER', () => {
         .post('/users/login')
         .send({ password })
         .then(res => {
-          expect(res).to.have.status(403);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(403);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.a('string');
           expect(res.body.message).to.be.equal(
-            'User & password combination is wrong, or User is not Found'
+            'Requirement not satisfied'
           );
 
           done();
@@ -272,15 +272,15 @@ describe('TEST USER', () => {
         .post('/users/login')
         .send({ email })
         .then(res => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(500);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.a('string');
           expect(res.body.message).to.be.equal(
-            'Illegal arguments: undefined, string'
+            'Requirement not satisfied'
           );
 
           done();
@@ -294,15 +294,15 @@ describe('TEST USER', () => {
         .post('/users/login')
         .send({})
         .then(res => {
-          expect(res).to.have.status(403);
+          expect(res).to.have.status(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
           expect(res.body.status).to.be.a('number');
-          expect(res.body.status).to.be.equal(403);
+          expect(res.body.status).to.be.equal(400);
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.be.a('string');
           expect(res.body.message).to.be.equal(
-            'User & password combination is wrong, or User is not Found'
+            'Requirement not satisfied'
           );
 
           done();

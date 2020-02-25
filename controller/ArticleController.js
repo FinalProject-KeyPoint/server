@@ -4,33 +4,33 @@ const Sample = require('../model/Sample')
 const removeDuplicate = require('../helper/removeDuplicate')
 
 class ArticleController{
-    static test(req,res)
-    {
-        res.json({ message: 'Article Connected' })
-    }
+    // static test(req,res)
+    // {
+    //     res.json({ message: 'Article Connected' })
+    // }
 
-    static masterFind(req,res,next)
-    {
-        Article.find()
-        .then(result=>{
-            res.status(200).json(result)
-        })
-        .catch(err=>{
-            next(err)
-        })
-    }
+    // static masterFind(req,res,next)
+    // {
+    //     Article.find()
+    //     .then(result=>{
+    //         res.status(200).json(result)
+    //     })
+    //     .catch(err=>{
+    //         next(err)
+    //     })
+    // }
 
 
-    static masterDelete(req,res,next)
-    {
-        Article.remove()
-        .then(result=>{
-            res.status(200).json(result)
-        })
-        .catch(err=>{
-            next(err)
-        })
-    }
+    // static masterDelete(req,res,next)
+    // {
+    //     Article.remove()
+    //     .then(result=>{
+    //         res.status(200).json(result)
+    //     })
+    //     .catch(err=>{
+    //         next(err)
+    //     })
+    // }
 
     static addArticle(req,res,next)
     {
@@ -40,7 +40,8 @@ class ArticleController{
         console.log(`TCL: ArticleController -> UserId`, UserId)
 
         Article.create({
-            UserId, url, keyPoint, title
+            UserId, url, keyPoint, title,
+            createdAt : new Date()
         })
         .then(result=>{
             res.status(201).json(result)
