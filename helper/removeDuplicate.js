@@ -1,9 +1,10 @@
-/* istanbul ignore file */
+
 
 const excludedWord = [
     'kami', 'saya', 'dia', 'akan', 'nanti', 'yang', 'yaitu',
     'dan', 'atau', 'di', 'kita', 'dari', 'lalu', 'untuk',
-    'ada', 'sejak', 'baik', 'belum', 'itu'
+    'ada', 'sejak', 'baik', 'belum', 'itu', 'ke', 'oleh',
+    'pada', 'saat', 'bahkan', 'and', 'dan'
 ]
 // before update
 // const excludedWord = [
@@ -29,11 +30,11 @@ function removeExcludedWord ( textString ){
 
 module.exports = ( originalText )=>{
     const minimumMatch = 30
-    console.log(`\n\n\nTCL: originalText\n=================\n`, originalText)
+    // console.log(`\n\n\nTCL: originalText\n=================\n`, originalText)
 
     fullText = removeExcludedWord( originalText.join('splitter1').replace(/\n/gi).toLowerCase() ) //pake yang ini
     // fullText = removeExcludedWord( testText.join('splitter1') ) //nanti dicomment
-    console.log(`\n\n\n\n\nTCL: fullText\n=================\n`, fullText)
+    // console.log(`\n\n\n\n\nTCL: fullText\n=================\n`, fullText)
 
 
     const redactedFullTextArray = []
@@ -116,5 +117,6 @@ module.exports = ( originalText )=>{
         console.log('=========================================\n\n\n\n\n')
     }
 
+    console.log(`TCL: redactedFullTextArray`, redactedFullTextArray)
     return redactedFullTextArray
 }

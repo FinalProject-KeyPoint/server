@@ -126,6 +126,7 @@ class ArticleController{
         Sample.find()
         .then(result=>{
             const originalArticle = result[req.body.index].originalArticle
+            console.log(`TCL: originalArticle`, originalArticle)
             res.status(200).json({
                 originalArticle,
                 redactedArticle : removeDuplicate(originalArticle)
