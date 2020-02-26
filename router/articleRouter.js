@@ -12,7 +12,10 @@ router.post('/demo', ArticleController.demo)
 
 router.use(authentication)
 router.get('/', ArticleController.findArticles)
+router.get('/equalDate', ArticleController.findByEqualDate)
 router.post('/', ArticleController.addArticle)
+
+
 
 router.use('/:articleId', authorization)
 router.delete('/:articleId', ArticleController.deleteArticle)
