@@ -11,6 +11,7 @@ router.post('/redactedArticle', ArticleController.removeDuplicate)
 router.post('/demo', ArticleController.demo)
 
 router.use(authentication)
+router.get('/', ArticleController.findArticles)
 router.post('/', ArticleController.addArticle)
 
 router.use('/:articleId', authorization)

@@ -32,6 +32,16 @@ class ArticleController{
     //     })
     // }
 
+    static findArticles(req, res, next) {
+        Article.find({ UserId: req.decodedUser._id })
+            .then(result=>{
+                res.status(200).json(result)
+            })
+            .catch(err=>{
+                next(err)
+            })
+    }
+
     static addArticle(req,res,next)
     {
         console.log(' \n\n\n======================\n ADD ARTICLE')
