@@ -3,10 +3,10 @@ const ArticleController =  require('../controller/ArticleController')
 const authentication = require('../middleware/authentication')
 const authorization = require('../middleware/authorization')
 
-// router.get('/test', ArticleController.test)
+router.get('/test', ArticleController.test)
 router.post('/redactedArticle', ArticleController.removeDuplicate)
-// router.get('/masterFind', ArticleController.masterFind)
-// router.delete('/masterDelete', ArticleController.masterDelete)
+router.get('/masterFind', ArticleController.masterFind)
+router.delete('/masterDelete', ArticleController.masterDelete)
 
 router.post('/demo', ArticleController.demo)
 

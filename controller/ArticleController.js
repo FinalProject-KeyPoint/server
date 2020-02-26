@@ -4,33 +4,33 @@ const Sample = require('../model/Sample')
 const removeDuplicate = require('../helper/removeDuplicate')
 
 class ArticleController{
-    // static test(req,res)
-    // {
-    //     res.json({ message: 'Article Connected' })
-    // }
+    static test(req,res)
+    {
+        res.json({ message: 'Article Connected' })
+    }
 
-    // static masterFind(req,res,next)
-    // {
-    //     Article.find()
-    //     .then(result=>{
-    //         res.status(200).json(result)
-    //     })
-    //     .catch(err=>{
-    //         next(err)
-    //     })
-    // }
+    static masterFind(req,res,next)
+    {
+        Article.find()
+        .then(result=>{
+            res.status(200).json(result)
+        })
+        .catch(err=>{
+            next(err)
+        })
+    }
 
 
-    // static masterDelete(req,res,next)
-    // {
-    //     Article.remove()
-    //     .then(result=>{
-    //         res.status(200).json(result)
-    //     })
-    //     .catch(err=>{
-    //         next(err)
-    //     })
-    // }
+    static masterDelete(req,res,next)
+    {
+        Article.remove()
+        .then(result=>{
+            res.status(200).json(result)
+        })
+        .catch(err=>{
+            next(err)
+        })
+    }
 
     static findArticles(req, res, next) {
         Article.find({ UserId: req.decodedUser._id })
