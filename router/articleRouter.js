@@ -11,7 +11,7 @@ router.delete('/masterDelete', ArticleController.masterDelete)
 router.post('/demo', ArticleController.demo)
 
 router.use(authentication)
-router.get('/equalDate', ArticleController.findByEqualDate)
+router.post('/equalDate', ArticleController.findByEqualDate)
 router.get('/', ArticleController.findArticles)
 router.post('/', ArticleController.addArticle)
 

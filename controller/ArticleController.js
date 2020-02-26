@@ -47,6 +47,7 @@ class ArticleController{
     {
         console.log(' \n\n\n======================\n findByEqualDate')
         const { dateString } = req.body
+        console.log(`TCL: ArticleController -> req.body`, req.body)
 
         const startDate = new Date(dateString)
         const endDate = new Date(dateString)
