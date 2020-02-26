@@ -107,13 +107,14 @@ module.exports = ( originalText )=>{
         }
         
         console.log(`TCL: uniqueStatus`, uniqueStatus)
-
+        console.log(' \n\n\n======================\n x sekarang', x)
         if(uniqueStatus)
             redactedFullTextArray.push(originalText[x])
 
-        if(x === fullText.length-2 && uniqueStatus)
+        if(x === fullText.length-2)
             redactedFullTextArray.push(originalText[x+1])
         
+            
         console.log('=========================================\n\n\n\n\n')
     }
 

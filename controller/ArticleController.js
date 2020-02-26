@@ -42,6 +42,37 @@ class ArticleController{
             })
     }
 
+
+    static findByEqualDate(req,res,next)
+    {
+        console.log(' \n\n\n======================\n findByEqualDate')
+        const { dateString } = req.body
+
+        const startDate = new Date(dateString)
+        const endDate = new Date(dateString)
+        endDate.setDate( endDate.getDate() + 1 )
+        console.log(`TCL: ArticleController -> startDate`, startDate)
+        console.log(`TCL: ArticleController -> endDate`, endDate)
+
+        Article.find({ 
+                UserId: req.decodedUser._id,
+                createdAt : { 
+                    $gte: startDate,
+                    $lt: endDate
+                }
+        })
+        .then(result=>{
+            if(result.length>0)
+                res.status(200).json(result)
+            else
+                throw({status: 404, message:'Articles not found on the date'})
+        })
+        .catch(err=>{
+            next(err)
+        })
+    }
+
+
     static addArticle(req,res,next)
     {
         console.log(' \n\n\n======================\n ADD ARTICLE')

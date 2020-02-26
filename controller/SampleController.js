@@ -8,6 +8,17 @@ class SampleController{
         res.json({ message : 'Sample Connected' })
     }
 
+    static count(req,res,next)
+    {
+        Sample.estimatedDocumentCount()
+        .then(result=>{
+            res.status(200).json(result)
+        })
+        .catch(err=>{
+            next(err)
+        })
+    }
+
     static masterFind(req,res,next)
     {
         Sample.find()
