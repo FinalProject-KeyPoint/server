@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 const Sample = require('../model/Sample')
 
 class SampleController{

@@ -32,6 +32,16 @@ class ArticleController{
         })
     }
 
+    static findArticles(req, res, next) {
+        Article.find({ UserId: req.decodedUser._id })
+            .then(result=>{
+                res.status(200).json(result)
+            })
+            .catch(err=>{
+                next(err)
+            })
+    }
+
     static addArticle(req,res,next)
     {
         console.log(' \n\n\n======================\n ADD ARTICLE')
@@ -40,7 +50,8 @@ class ArticleController{
         console.log(`TCL: ArticleController -> UserId`, UserId)
 
         Article.create({
-            UserId, url, keyPoint, title
+            UserId, url, keyPoint, title,
+            createdAt : new Date()
         })
         .then(result=>{
             res.status(201).json(result)
@@ -125,6 +136,7 @@ class ArticleController{
         Sample.find()
         .then(result=>{
             const originalArticle = result[req.body.index].originalArticle
+            console.log(`TCL: originalArticle`, originalArticle)
             res.status(200).json({
                 originalArticle,
                 redactedArticle : removeDuplicate(originalArticle)

@@ -4,6 +4,7 @@ module.exports = (err,req,res,next)=>{
         =======================================
         ${err}
     `);
+    // console.log(`TCL: err`, err)
     
     let status = err.status || 500
     let message = err.message || 'INTERNAL SERVER ERROR'
@@ -19,9 +20,14 @@ module.exports = (err,req,res,next)=>{
             break;
     
         case 'MongoError':
-            status = 409
-            if(err.code = 11000)
+            if(err.code == 11000){
+                status = 409
                 message = `${Object.keys(err.keyPattern)} is already used`
+            }
+            break
+
+        case 'JsonWebTokenError':
+            status= 400
             break
 
         default:

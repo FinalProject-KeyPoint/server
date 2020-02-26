@@ -14,10 +14,18 @@ const articleSchema = new Schema({
         type: String,
         required: [true, 'Url is required']
     },
-    keyPoint:[{
-        type: String,
-        required: [true, 'Keypoint is required']
-    }]
+    keyPoint:{
+        type: [String],
+        validate:{
+            validator: function(v){
+                return  v.length > 0
+            },
+            message : props => 'Keypoint is required'
+        }
+    },
+    createdAt:{
+        type: Date
+    }
 })
 
 const Article = mongoose.model('Articles', articleSchema)
