@@ -15,7 +15,7 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static('./bin/public'))
+app.use(express.static('/home/jap_hendy_wijaya/KeyPoint/server/bin/public'))
 app.use(require('cors')())
 app.use(require('morgan')('combined'))
 

@@ -1,10 +1,10 @@
 const fs = require('fs')
-const port = process.env.PORT
+co
 
 const https = require('https').createServer({
     key: fs.readFileSync('/home/jap_hendy_wijaya/KeyPoint/server/bin/public/privkey.pem'),
     cert: fs.readFileSync('/home/jap_hendy_wijaya/KeyPoint/server/bin/public/fullchain.pem')
 },require('../app'))
-.listen(443, ()=>{
+.listen(port, ()=>{
 console.log('secure server is running')
 })
