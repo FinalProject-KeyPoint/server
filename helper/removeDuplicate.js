@@ -32,7 +32,7 @@ module.exports = ( originalText )=>{
     const minimumMatch = 30
     // console.log(`\n\n\nTCL: originalText\n=================\n`, originalText)
 
-    fullText = removeExcludedWord( originalText.join('splitter1').replace(/\n/gi).toLowerCase() ) //pake yang ini
+    const fullText = removeExcludedWord( originalText.join('splitter1').replace(/\n/gi).toLowerCase() ) //pake yang ini
     // fullText = removeExcludedWord( testText.join('splitter1') ) //nanti dicomment
     // console.log(`\n\n\n\n\nTCL: fullText\n=================\n`, fullText)
 

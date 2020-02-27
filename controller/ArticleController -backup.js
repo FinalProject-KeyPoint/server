@@ -4,33 +4,33 @@ const Sample = require('../model/Sample')
 const removeDuplicate = require('../helper/removeDuplicate')
 
 class ArticleController{
-    // static test(req,res)
-    // {
-    //     res.json({ message: 'Article Connected' })
-    // }
+    static test(req,res)
+    {
+        res.json({ message: 'Article Connected' })
+    }
 
-    // static masterFind(req,res,next)
-    // {
-    //     Article.find()
-    //     .then(result=>{
-    //         res.status(200).json(result)
-    //     })
-    //     .catch(err=>{
-    //         next(err)
-    //     })
-    // }
+    static masterFind(req,res,next)
+    {
+        Article.find()
+        .then(result=>{
+            res.status(200).json(result)
+        })
+        .catch(err=>{
+            next(err)
+        })
+    }
 
 
-    // static masterDelete(req,res,next)
-    // {
-    //     Article.remove()
-    //     .then(result=>{
-    //         res.status(200).json(result)
-    //     })
-    //     .catch(err=>{
-    //         next(err)
-    //     })
-    // }
+    static masterDelete(req,res,next)
+    {
+        Article.remove()
+        .then(result=>{
+            res.status(200).json(result)
+        })
+        .catch(err=>{
+            next(err)
+        })
+    }
 
     static findArticles(req, res, next) {
         Article.find({ UserId: req.decodedUser._id })
@@ -47,7 +47,7 @@ class ArticleController{
     {
         console.log(' \n\n\n======================\n findByEqualDate')
         const { dateString } = req.body
-        // console.log(`TCL: ArticleController -> req.body`, req.body)
+        console.log(`TCL: ArticleController -> req.body`, req.body)
 
         const startDate = new Date(dateString)
         const endDate = new Date(dateString)
@@ -79,7 +79,7 @@ class ArticleController{
         console.log(' \n\n\n======================\n ADD ARTICLE')
         const { url, keyPoint, title } = req.body
         const UserId = req.decodedUser._id
-        // console.log(`TCL: ArticleController -> UserId`, UserId)
+        console.log(`TCL: ArticleController -> UserId`, UserId)
 
         Article.create({
             UserId, url, keyPoint, title,
@@ -162,22 +162,22 @@ class ArticleController{
 
 
     // sample dari live test
-    // static demo(req,res,next)
-    // {
-    //     console.log(' \n\n\n======================\n DEMO')
-    //     Sample.find()
-    //     .then(result=>{
-    //         const originalArticle = result[req.body.index].originalArticle
-    //         // console.log(`TCL: originalArticle`, originalArticle)
-    //         res.status(200).json({
-    //             originalArticle,
-    //             redactedArticle : removeDuplicate(originalArticle)
-    //         })
-    //     })
-    //     .catch(err=>{
-    //         next(err)
-    //     })
-    // }
+    static demo(req,res,next)
+    {
+        console.log(' \n\n\n======================\n DEMO')
+        Sample.find()
+        .then(result=>{
+            const originalArticle = result[req.body.index].originalArticle
+            console.log(`TCL: originalArticle`, originalArticle)
+            res.status(200).json({
+                originalArticle,
+                redactedArticle : removeDuplicate(originalArticle)
+            })
+        })
+        .catch(err=>{
+            next(err)
+        })
+    }
 
     // hard code sample
     // static demo(req,res,next)

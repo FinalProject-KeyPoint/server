@@ -66,6 +66,29 @@ describe('TEST USER', () => {
         .catch(err => done(err));
     });
 
+    it('email format is wrong, so it should be error', done => {
+      chai
+        .request(app)
+        .post('/users/register')
+        .send({ username, password, email:'markus' })
+        .then(res => {
+          expect(res).to.have.status(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('errName');
+          expect(res.body.errName).to.be.a('string');
+          expect(res.body.errName).to.be.equal('ValidationError');
+          expect(res.body).to.have.property('status');
+          expect(res.body.status).to.be.a('number');
+          expect(res.body.status).to.be.equal(400);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.be.an('array');
+          expect(res.body.message).to.be.deep.equal(['Email format is incorrect']);
+
+          done();
+        })
+        .catch(err => done(err));
+    });
+
     it('username is not provided, so it should be error', done => {
       chai
         .request(app)

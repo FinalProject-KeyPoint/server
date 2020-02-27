@@ -317,6 +317,44 @@ describe('ARTICLE TEST', function(){
     });
   });
 
+  describe('find article by equal date', () => {
+    const { title, url, keyPoint } = newArticle;
+    it('find with all correct parameter, so it should be okay', done => {
+      chai
+        .request(app)
+        .post(`/articles/equalDate`)
+        .set('token', newUser.token)
+        .send({dateString: '2020-02-27'})
+        .then(res => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('array');
+          
+
+          done();
+        })
+        .catch(err => done(err));
+    });
+
+    it('find article but no article match, so it should be error', done => {
+      chai
+        .request(app)
+        .post(`/articles/equalDate`)
+        .set('token', newUser.token)
+        .send({dateString: '2020-03-27'})
+        .then(res => {
+          expect(res).to.have.status(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.be.a('string');
+          expect(res.body.message).to.be.equal('Articles not found on the date');
+          
+
+          done();
+        })
+        .catch(err => done(err));
+    });
+  })
+
   describe('delete an article', () => {
     const { title, url, keyPoint } = newArticle;
     it('token is not provided, so it should be error', done => {
@@ -388,6 +426,7 @@ describe('ARTICLE TEST', function(){
         .send( sampleArticle )
         .then(res=>{
           expect(res).to.have.status(200)
+          done()
         })
         .catch(err => done(err))
     })

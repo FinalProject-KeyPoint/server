@@ -1,9 +1,9 @@
 module.exports = (err,req,res,next)=>{
-    console.log(`
-        ERROR HAPPENED - LOG FROM ERROR HANDLER
-        =======================================
-        ${err}
-    `);
+    // console.log(`
+    //     ERROR HAPPENED - LOG FROM ERROR HANDLER
+    //     =======================================
+    //     ${err}
+    // `);
     // console.log(`TCL: err`, err)
     
     let status = err.status || 500

@@ -3,32 +3,32 @@ const { generateToken } = require('../helper/jwt')
 const { verifyHash } = require('../helper/bcryptjs')
 
 class UserController{
-    static test(req,res)
-    {
-        res.json({ message: 'User Connected' })
-    }
+    // static test(req,res)
+    // {
+    //     res.json({ message: 'User Connected' })
+    // }
 
-    static masterFind(req,res,next)
-    {
-        User.find()
-        .then(result=>{
-            res.status(200).json(result)
-        })
-        .catch(err=>{
-            next(err)
-        })
-    }
+    // static masterFind(req,res,next)
+    // {
+    //     User.find()
+    //     .then(result=>{
+    //         res.status(200).json(result)
+    //     })
+    //     .catch(err=>{
+    //         next(err)
+    //     })
+    // }
 
-    static masterDelete(req,res,next)
-    {
-        User.remove()
-        .then(result=>{
-            res.status(200).json(result)
-        })
-        .catch(err=>{
-            next(err)
-        })
-    }
+    // static masterDelete(req,res,next)
+    // {
+    //     User.remove()
+    //     .then(result=>{
+    //         res.status(200).json(result)
+    //     })
+    //     .catch(err=>{
+    //         next(err)
+    //     })
+    // }
 
     static register(req,res,next)
     {
