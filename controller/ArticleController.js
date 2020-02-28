@@ -121,7 +121,8 @@ class ArticleController{
         .then( ()=>{
             return axios({
                 method: 'post',
-                url: 'http://13.250.46.91:3000',
+                // url: 'http://13.250.46.91:3000', //server 1
+                url: 'http://13.229.114.69:3000/',
                 data:{
                     isi_artikel : redactedArticle.join(' ')
                 }
